@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+       .red{
+           color: red;
+       }
+
+       .thin{
+           font-weight: 200;
+       }
+
+       .italic{
+           font-style: italic;
+       }
+
+       .active{
+           letter-spacing: 0.5em;
+       }
+    </style>
+</head>
+<body>
+    
+    <div id="app">
+
+        <h1 class="thin italic active">这是一个很大很大的h1</h1>
+
+        <!-- 第一种使用方式，直接传递一个数组，注意，这里的class需要使用 v-bind做数据绑定   -->
+        <!-- 且里面的class需要用单引号扩出来 -->
+        <h1 :class="['thin','italic','active']">这是一个很大很大的h1</h1>
+
+        <!-- 在数组中使用三元表达式 -->
+        <h1 :class="['thin','italic',flag ? 'active' : '']">这是一个很大很大的h1</h1>
+
+        <!-- 在数组中使用三元表达式不好读，改为在数组里面写一个对象 --> 
+        <!-- 用对象来代替三元表达式，提高代码的可重用性 -->
+        <h1 :class="['thin', 'italic', {'active':flag}]">这是一个很大很大的h1</h1>
+
+        <!-- 在为 class 使用v-bind绑定对象的时候，对象的属性是类名，由于对象的属性可带引号可不带引号，所有这里没带引号 -->
+        <h1 :class="classObj">这是一个很大很大的h1</h1>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                flag:true,
+                classObj:{ red: true, thin:false, italic:true , active: false}
+            },
+            methods:{
+
+            }
+        })
+    </script>
+    
+</body>
+</html>
+
+
+<!-- 在Vue中使用样式 -->
+<!-- 使用class样式 -->
+<!-- 1. 数组 -->
+<!-- 2. 数组中使用三元表达式 -->
+<!-- 3. 数组中嵌套对象 -->
+<!-- 4. 直接使用对象 -->

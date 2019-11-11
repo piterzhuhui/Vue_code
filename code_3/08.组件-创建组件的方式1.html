@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <!-- 如果要使用组件，直接把组件的名称，以HTML标签的形式，引入到页面中，即可 -->
+        <my-coml></my-coml>
+
+        <myt-coml></myt-coml>
+    </div>
+
+    <script>
+        // 1.1 使用 Vue.extend 来创建全局的 Vue组件
+        var coml = Vue.extend({
+            //通过 template 属性，指定了组件要展示的HTML结构
+            template:'<h3>这里是 Vue.extend 创建的组件 </h3>' 
+        })
+        // 1.2 使用 Vue.component('组件的名称',创建出来的组件模板对象)
+        // 如果使用 Vue.component 定义全局组件的时候，组件名称 使用了驼峰命名，则在 引用组件的时候，需要
+        // 把大写的驼峰改为 小写的字母，同时，两个单词之间，使用 - 连接
+        // 如果命名为小写的，之间使用就可以，不用加-
+        Vue.component('myComl',coml)
+
+
+
+        // 第二种方法,不使用中间对象，之间把Vue.extend 模板对象给组件名
+        // Vue.component 第一个参数的名称，就是引用组建的时候，就是以一个 标签形式来引入
+        // 第二个参数： Vue.extend 创建的组件，其中 template 就是组件将来要展示的 HTML 内容
+        Vue.component('mytComl',Vue.extend({
+            //通过 template 属性，指定了组件要展示的HTML结构
+            template:'<h4>这里是 Vue.extend 创建的组件 </h4>' 
+        }))
+
+
+
+        var vm = new Vue({
+            el:'#app',
+            data:{
+
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>
